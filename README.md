@@ -1,6 +1,6 @@
 # Chocolate Cake E-Commerce Website
 
-![Website Preview](image/logo.jpeg)
+![Website Preview](coklatkita.netlify.app)
 
 A modern, responsive e-commerce website for selling chocolate products with interactive features.
 
