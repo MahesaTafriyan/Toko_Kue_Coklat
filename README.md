@@ -1,33 +1,41 @@
-# Chocolate Cake E-Commerce Website
+# 🍫 Chocolate Cake - ChocoCrunch Delights
 
-![coklatkita.netlify.app](coklatkita.netlify.app)
+A modern and interactive landing page for a chocolate snack store built using **HTML**, **TailwindCSS**, and **JavaScript**.  
+This project provides a clean, responsive UI for displaying products and managing a basic shopping cart.
 
-A modern, responsive e-commerce website for selling chocolate products with interactive features.
+![Banner](https://images.unsplash.com/photo-1493925410384-84f842e616fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)
 
-## Features
+---
 
-- **Responsive Design**: Works on all devices (mobile, tablet, desktop)
-- **Interactive Elements**:
-  - Shopping cart functionality
-  - Product quantity controls
-  - Checkout form
-- **UI Enhancements**:
-  - Scroll progress bar
-  - Background music player
-  - Animated floating chocolate pieces
-  - Smooth scroll navigation
-- **Performance Optimized**: Fast loading with minimal dependencies
+## ✨ Features
 
-## Technologies Used
+- 💻 **Responsive design** with TailwindCSS  
+- 🛍️ Interactive **shopping cart** (JS logic ready)
+- 🍫 Product showcase with dynamic quantity controls
+- 📱 Fully **mobile-friendly layout**
+- 📇 Contact section for support / orders
+- 🌙 Easy to customize and extend
 
-- HTML5
-- CSS3 (with Tailwind CSS)
-- JavaScript
-- Font Awesome Icons
-- Google Fonts (Poppins)
+---
 
-## Installation
+## 📂 File Structure
 
-No installation required - just open `index.html` in any modern browser.
+.
+├── index.html
+├── styles.css
+├── script.js
+└── image/
+    ├── logo.jpeg
+    ├── GabinChoco.jpg
+    └── JellyBall.jpg
 
-## Project Structure
+
+---
+
+## 🛠️ Tech Stack
+
+- **HTML5**
+- **TailwindCSS** (via CDN)
+- **Font Awesome** (icons)
+- **Custom CSS** (`styles.css`)
+- **Vanilla JavaScript** (`script.js`)
