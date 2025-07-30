@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="image/logo.jpeg" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-amber-50 text-gray-800 font-poppins">
+    <!-- Scroll Progress Bar -->
+    <div class="progress-container fixed top-0 left-0 w-full h-1 bg-transparent z-50">
+        <div class="progress-bar h-full bg-amber-800" id="progressBar"></div>
+    </div>
+
+    <!-- Audio Player -->
+    <div class="audio-player fixed bottom-4 left-4 z-50 flex items-center gap-2">
+        <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-amber-800 text-white flex items-center justify-center shadow-lg hover:bg-amber-900 transition-all">
+            <i class="fas fa-play"></i>
+        </button>
+        <div class="text-xs text-white bg-black bg-opacity-50 px-2 py-1 rounded hidden md:block">
+            Background Music: <span id="songTitle">Chocolate Theme</span>
+        </div>
+        <audio id="bgMusic" loop>
+            <source src="https://audio.jukehost.co.uk/iGOlZXr7L994tW2CTEf1kzeW83ZOXWVx" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div id="musicAlert" class="absolute -top-10 left-0 bg-black bg-opacity-70 text-white px-3 py-1 rounded text-xs whitespace-nowrap hidden">
+            Click the play button to enable sound
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-md fixed w-full top-0 z-40 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#home" class="logo flex items-center font-bold text-2xl text-amber-800 no-underline">
+                <img src="image/logo.jpeg" alt="ChocoCrunch Delights" class="h-12 mr-4 transition-all duration-300">
+                <span class="hidden sm:inline">Chocolate Cake</span>
+            </a>
+            
+            <div class="flex items-center space-x-4">
+                <nav id="nav" class="sm:hidden fixed top-20 left-0 w-full">
+                    <ul class="flex flex-col">
+                        <li class="px-4 py-3"><a href="#home" class="text-gray-800 font-medium no-underline hover:text-amber-800 transition-all duration-300 relative">Home</a></li>
+                        <li class="px-4 py-3"><a href="#products" class="text-gray-800 font-medium no-underline hover:text-amber-800 transition-all duration-300 relative">Products</a></li>
+                        <li class="px-4 py-3"><a href="#contact" class="text-gray-800 font-medium no-underline hover:text-amber-800 transition-all duration-300 relative">Contact</a></li>
+                        <li class="cart-icon px-4 py-3">
+                            <a href="#cart" class="text-gray-800 font-medium no-underline hover:text-amber-800 transition-all duration-300 relative">
+                                <i class="fas fa-shopping-cart"></i> 
+                                <span class="cart-count absolute bg-amber-800 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-semibold">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <div class="hidden sm:flex items-center">
+                    <a href="#cart" class="text-gray-800 font-medium no-underline hover:text-amber-800 transition-all duration-300 relative mr-6">
+                        <i class="fas fa-shopping-cart"></i> 
+                        <span class="cart-count absolute -top-2 -right-2 bg-amber-800 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-semibold">0</span>
+                    </a>
+                </div>
+                
+                <div class="mobile-menu sm:hidden text-xl cursor-pointer transition-all duration-300" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero bg-cover bg-center bg-fixed relative h-screen min-h-[700px] flex items-center text-center text-white" id="home" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1493925410384-84f842e616fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
+        <div class="container mx-auto px-4 relative z-10 animate-fadeInUp">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-shadow-lg">Cheesy and Chocolaty Goodness!</h1>
+            <p class="text-lg sm:text-xl mb-10 max-w-3xl mx-auto opacity-90 text-shadow">Premium quality chocolate snacks made with love and the finest ingredients</p>
+            <a href="#products" class="btn inline-block bg-amber-800 text-white px-8 py-3 rounded-full no-underline font-semibold transition-all duration-300 hover:bg-amber-900 hover:transform hover:-translate-y-1 shadow-lg">Shop Now</a>
+        </div>
+        <div class="choco-pieces absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:0s; --x:5vw; --size:40px;"></div>
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:1s; --x:15vw; --size:30px;"></div>
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:2s; --x:25vw; --size:50px;"></div>
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:3s; --x:35vw; --size:45px;"></div>
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:4s; --x:45vw; --size:35px;"></div>
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:5s; --x:55vw; --size:40px;"></div>
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:6s; --x:65vw; --size:50px;"></div>
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:7s; --x:75vw; --size:30px;"></div>
+            <div class="choco-piece absolute rounded-full opacity-60 animate-float" style="--delay:8s; --x:85vw; --size:45px;"></div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products bg-white py-20 relative" id="products">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-14 relative">Our Products</h2>
+            <div class="product-grid grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl p-6 border border-gray-100 text-center">
+                    <div class="product-image rounded-lg mb-6 h-64 flex items-center justify-center overflow-hidden">
+                        <img src="image/GabinChoco.jpg" alt="Gabin Chocolate" class="max-w-full max-h-full object-contain transition-all duration-300">
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-800 mb-4">Gabin Chocolate</h3>
+                    <p class="description text-gray-800 opacity-80 min-h-[60px]">Gabin coklat adalah camilan yang sempurna untuk dinikmati saat santai.</p>
+                    <p class="price font-bold text-amber-900 text-xl my-5">Rp2000 / pack</p>
+                    <div class="quantity flex justify-center items-center my-6">
+                        <button class="minus bg-amber-200 border-none w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-amber-600 hover:text-white rounded-lg">-</button>
+                        <input type="number" value="1" min="1" class="qty w-16 h-10 text-center mx-3 border border-amber-200 rounded-lg font-semibold">
+                        <button class="plus bg-amber-200 border-none w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-amber-600 hover:text-white rounded-lg">+</button>
+                    </div>
+                    <button class="add-to-cart w-full py-3 bg-amber-800 text-white border-none rounded-full cursor-pointer transition-all duration-300 hover:bg-amber-900 font-semibold uppercase tracking-wider" data-id="1" data-name="Gabin Chocolate" data-price="2000">Add to Cart</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl p-6 border border-gray-100 text-center">
+                    <div class="product-image rounded-lg mb-6 h-64 flex items-center justify-center overflow-hidden">
+                        <img src="image/JellyBall.jpg" alt="Chocolate Cheese Balls" class="max-w-full max-h-full object-contain transition-all duration-300">
+                    </div>
+                    <h3 class="text-xl font-bold text-amber-800 mb-4">Chocolate Cheese Balls</h3>
+                    <p class="description text-gray-800 opacity-80 min-h-[60px]">Bola Jelly yang chocolate beserta keju yang creamy dicampur dengan susu</p>
+                    <p class="price font-bold text-amber-900 text-xl my-5">Rp2000 / pack</p>
+                    <div class="quantity flex justify-center items-center my-6">
+                        <button class="minus bg-amber-200 border-none w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-amber-600 hover:text-white rounded-lg">-</button>
+                        <input type="number" value="1" min="1" class="qty w-16 h-10 text-center mx-3 border border-amber-200 rounded-lg font-semibold">
+                        <button class="plus bg-amber-200 border-none w-10 h-10 flex items-center justify-center transition-all duration-300 hover:bg-amber-600 hover:text-white rounded-lg">+</button>
+                    </div>
+                    <button class="add-to-cart w-full py-3 bg-amber-800 text-white border-none rounded-full cursor-pointer transition-all duration-300 hover:bg-amber-900 font-semibold uppercase tracking-wider" data-id="2" data-name="Chocolate Cheese Balls" data-price="2000">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 justify-center items-center backdrop-blur-sm" id="cart">
+        <div class="modal-content bg-white p-8 rounded-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto relative shadow-xl">
+            <span class="close absolute top-4 right-4 text-2xl cursor-pointer">&times;</span>
+            <h2 class="text-2xl font-bold text-center mb-8 text-amber-800 relative">Your Cart</h2>
+            <div class="cart-items my-8">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-total text-right mt-8 pt-6 border-t-2 border-amber-800">
+                <h3 class="text-xl font-bold text-amber-900">Total: <span id="total-price" class="text-2xl text-amber-800">Rp0</span></h3>
+            </div>
+            <button class="btn checkout-btn w-full mt-6 py-4 bg-amber-800 text-white border-none rounded-full cursor-pointer transition-all duration-300 hover:bg-amber-900 font-semibold">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <div class="checkout-form hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 justify-center items-center backdrop-blur-sm">
+        <div class="form-content bg-white p-8 rounded-xl w-full max-w-md relative shadow-xl">
+            <span class="close-form absolute top-4 right-4 text-2xl cursor-pointer">&times;</span>
+            <h2 class="text-2xl font-bold text-center mb-8">Checkout</h2>
+            <form id="order-form">
+                <div class="form-group mb-6">
+                    <label for="name" class="block mb-2 font-medium text-amber-900">Full Name</label>
+                    <input type="text" id="name" required placeholder="Enter your full name" class="w-full px-5 py-3 border border-amber-200 rounded-lg focus:border-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-300">
+                </div>
+                <div class="form-group mb-6">
+                    <label for="phone" class="block mb-2 font-medium text-amber-900">Phone Number</label>
+                    <input type="tel" id="phone" required placeholder="Enter your phone number" class="w-full px-5 py-3 border border-amber-200 rounded-lg focus:border-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-300">
+                </div>
+                <div class="form-group mb-6">
+                    <label for="address" class="block mb-2 font-medium text-amber-900">Alamat</label>
+                    <textarea id="address" required placeholder="Enter your complete delivery address" class="w-full px-5 py-3 border border-amber-200 rounded-lg focus:border-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-300"></textarea>
+                </div>
+                <div class="form-group mb-6">
+                    <label class="block mb-2 font-medium text-amber-900">Payment Method</label>
+                    <div class="payment-options">
+                        <label class="flex items-center mb-3 cursor-pointer px-3 py-2 rounded-lg bg-amber-100 transition-all duration-300">
+                            <input type="radio" name="payment" value="cod" checked class="mr-2"> COD (Cash on Delivery)
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn w-full py-4 bg-amber-800 text-white border-none rounded-full cursor-pointer transition-all duration-300 hover:bg-amber-900 font-semibold">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Confirmation -->
+    <div class="confirmation hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 justify-center items-center backdrop-blur-sm">
+        <div class="confirmation-content bg-white p-10 rounded-xl text-center max-w-md">
+            <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
+            <h2 class="text-2xl font-bold mb-4">Order Placed Successfully!</h2>
+            <p class="mb-6">Thank you for your purchase. We'll process your order shortly.</p>
+            <button class="btn close-confirmation py-3 px-8 bg-amber-800 text-white border-none rounded-full cursor-pointer transition-all duration-300 hover:bg-amber-900 font-semibold">Back to Shop</button>
+        </div>
+    </div>
+
+    <!-- Contact Section with Scroll Buttons -->
+    <div class="contact-container relative">
+        <!-- Scroll Left Button -->
+        <button class="scroll-btn left-4" id="scrollLeft">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <section class="contact py-20" id="contact">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Contact Us</h2>
+                <div class="contact-info grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="contact-card text-center p-6 bg-white rounded-xl shadow-md">
+                        <i class="fas fa-phone text-3xl text-amber-800 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Kak Ghian</h3>
+                        <p>+62 812-5988-7671</p>
+                    </div>
+                    <div class="contact-card text-center p-6 bg-white rounded-xl shadow-md">
+                        <i class="fas fa-envelope text-3xl text-amber-800 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Email</h3>
+                        <p>mahesatafrian@gmail.com</p>
+                    </div>
+                    <div class="contact-card text-center p-6 bg-white rounded-xl shadow-md">
+                        <i class="fab fa-instagram text-3xl text-amber-800 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Instagram</h3>
+                        <p>@hesaxyz_</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Scroll Right Button -->
+        <button class="scroll-btn right-4" id="scrollRight">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-amber-800 to-amber-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="footer-content grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                <div class="footer-logo flex items-center justify-center md:justify-start">
+                    <img src="image/logo.jpeg" alt="ChocoCrunch Delights" class="h-12 mr-4">
+                    <span class="text-xl font-bold">ChocoCrunch Delights</span>
+                </div>
+                <div class="footer-links flex flex-col items-center md:items-start">
+                    <a href="#home" class="text-white no-underline mb-3 opacity-80 hover:opacity-100 hover:pl-1 transition-all duration-300">Home</a>
+                    <a href="#products" class="text-white no-underline mb-3 opacity-80 hover:opacity-100 hover:pl-1 transition-all duration-300">Products</a>
+                    <a href="#contact" class="text-white no-underline mb-3 opacity-80 hover:opacity-100 hover:pl-1 transition-all duration-300">Contact</a>
+                </div>
+            </div>
+            <p class="copyright text-center pt-8 border-t border-white border-opacity-10 text-sm opacity-70">&copy; 2025 Chocolate Cake, All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fab hidden fixed bottom-8 right-8 w-16 h-16 bg-amber-800 text-white rounded-full justify-center items-center text-2xl shadow-lg cursor-pointer z-40 transition-all duration-300 hover:bg-amber-900 hover:-translate-y-1" id="fab">
+        <i class="fas fa-shopping-cart"></i>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top fixed bottom-28 right-8 w-12 h-12 bg-amber-800 text-white rounded-full flex justify-center items-center text-lg shadow-lg cursor-pointer z-40 transition-all duration-300 hover:bg-amber-900 hover:-translate-y-1 opacity-0 invisible" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+        <div class="loading-spinner">
+            <div class="spinner-circle"></div>
+            <div class="spinner-text text-white mt-4 font-semibold">Processing your order...</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

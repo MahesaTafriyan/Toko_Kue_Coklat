@@ -1,0 +1,340 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary: #5D4037;
+    --secondary: #D7CCC8;
+    --accent: #8D6E63;
+    --light: #EFEBE9;
+    --dark: #3E2723;
+    --white: #FFFFFF;
+    --black: #212121;
+    --success: #4CAF50;
+    --error: #F44336;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 1s ease-out;
+}
+
+.animate-float {
+    animation: float 15s infinite linear;
+}
+
+/* Chocolate pieces */
+.choco-piece {
+    background-color: #D7CCC8;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+}
+
+/* Text shadow for hero text */
+.text-shadow {
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-lg {
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.notification.show {
+    opacity: 1;
+    bottom: 30px;
+}
+
+.notification.success {
+    background-color: var(--success);
+}
+
+.notification.error {
+    background-color: var(--error);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8D6E63;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5D4037;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem !important;
+    }
+    
+    .hero p {
+        font-size: 1.1rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 2rem !important;
+    }
+    
+    .hero p {
+        font-size: 1rem !important;
+    }
+    
+    .products h2 {
+        font-size: 2rem !important;
+    }
+}
+
+/* Mobile Navbar Enhancements */
+@media (max-width: 640px) {
+    #nav {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
+        background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    #nav.show {
+        max-height: 500px;
+        padding: 1rem 0;
+    }
+    
+    #nav ul li {
+        position: relative;
+        padding: 1rem 2rem;
+        transition: all 0.3s ease;
+    }
+    
+    #nav ul li:not(:last-child) {
+        border-bottom: 1px solid rgba(139, 92, 8, 0.1);
+    }
+    
+    #nav ul li a {
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        color: #5D4037;
+    }
+    
+    #nav ul li a::before {
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background-color: #8D6E63;
+        border-radius: 50%;
+        margin-right: 12px;
+        transition: all 0.3s ease;
+    }
+    
+    #nav ul li:hover {
+        background-color: rgba(139, 92, 8, 0.05);
+    }
+    
+    #nav ul li:hover a::before {
+        transform: scale(1.5);
+        background-color: #5D4037;
+    }
+    
+    .mobile-menu {
+        position: relative;
+        z-index: 100;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #5D4037;
+        border-radius: 50%;
+        color: white !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .mobile-menu:hover {
+        background: #3E2723;
+    }
+    
+    .cart-icon {
+        position: relative;
+    }
+    
+    .cart-count {
+        top: -5px;
+        right: -5px;
+    }
+}
+
+/* Loading spinner styles */
+.loading-spinner {
+    text-align: center;
+}
+
+.spinner-circle {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading-overlay {
+    transition: opacity 0.3s ease;
+}
+
+/* Audio Player Styles */
+.audio-player {
+    transition: all 0.3s ease;
+}
+
+.audio-player:hover {
+    transform: scale(1.05);
+}
+
+/* Volume slider */
+.volume-control {
+    width: 80px;
+    margin-left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.audio-player:hover .volume-control {
+    opacity: 1;
+}
+
+/* Logo Text Visibility for Mobile */
+.logo span {
+    display: inline !important;
+    font-size: 0.875rem;
+    margin-left: 0.25rem;
+}
+
+@media (min-width: 640px) {
+    .logo span {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .logo span {
+        font-size: 1.25rem;
+    }
+}
+
+/* Contact Section Horizontal Scroll */
+.contact-container {
+    position: relative;
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: #5D4037;
+    transition: all 0.3s ease;
+}
+
+.scroll-btn:hover {
+    background-color: #5D4037;
+    color: white;
+}
+
+@media (max-width: 640px) {
+    .scroll-btn {
+        display: flex;
+    }
+    
+    .contact-info {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        scroll-padding: 0 1rem;
+    }
+
+    .contact-info > div {
+        flex: 0 0 auto;
+        width: calc(100% - 2rem);
+        scroll-snap-align: center;
+        margin: 0 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .contact-info::-webkit-scrollbar {
+        display: none;
+    }
+}
