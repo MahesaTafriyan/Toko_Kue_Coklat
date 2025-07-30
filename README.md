@@ -21,13 +21,7 @@ This project provides a clean, responsive UI for displaying products and managin
 ## 📂 File Structure
 
 .
-├── index.html
-├── styles.css
-├── script.js
-└── image/
-    ├── logo.jpeg
-    ├── GabinChoco.jpg
-    └── JellyBall.jpg
+<pre> . ├── index.html # Main HTML file ├── styles.css # Custom CSS styling ├── script.js # JavaScript for interactivity (cart, buttons, etc.) └── image/ # Folder for image assets ├── logo.jpeg ├── GabinChoco.jpg └── JellyBall.jpg </pre>
 
 
 ---
